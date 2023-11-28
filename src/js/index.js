@@ -44,31 +44,6 @@ async function loadIntoTable(url, table) {
     tableBody.innerHTML = "<tr></tr>";
   
 
-    // for (const row of rows) {
-    //     const rowElement = document.createElement("tr");
-
-    //     for (let key in row) {
-    //         if (key == "id") {
-    //             continue
-    //         }
-    //         const cellElement = document.createElement("td");
-
-    //         if (key == "registration_date") {
-    //             const t = new Intl.DateTimeFormat()
-    //             cellElement.textContent = t.format(new Date(row[key]));
-    //         } else {
-    //             cellElement.textContent = row[key];
-    //         } 
-
-    //         rowElement.appendChild(cellElement);
-    //     }
-    //     const cellRemoveIcon = document.createElement("td");
-    //     const btn = document.createElement("button");
-    //     btn.className = "btn-remove";
-    //     cellRemoveIcon.appendChild(btn);
-    //     rowElement.appendChild(cellRemoveIcon);
-    //     tableBody.appendChild(rowElement);
-    // }
     renderTable(rows)
 }
 
@@ -81,7 +56,7 @@ function sortTest(value) {
     
     switch (value) {
         case "registration": 
-            rows.sort((a, b) => a.rating - b.rating);
+            rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
             console.log("Reg");
             break;
         case "rating": 
