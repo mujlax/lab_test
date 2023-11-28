@@ -9,9 +9,8 @@
 </head>
 <body>
 
-    <section class="users">
-        <h1 class="visually-hidden">Список пользователей</h1>
-        <div class="container">
+    <div class="container">
+        <section class="users">
             <h1 class="list__title">Список пользователей</h1>
             <div class="form__search">
                 <label class="search__label">
@@ -24,10 +23,39 @@
                 <input type="text" placeholder="Поиск по email" class="test2">
                 <input type="text" placeholder="Поиск по email" class="test2">
             </div> -->
-        </div>
+        </section>
 
-        
-    </section>
+        <section class="section-table_inner">
+            <h1 class="visually-hidden">Список пользователей</h1>
+
+            <button type="button" class="btn-sort" onclick="sortTest(this.value)" value="registration">Дата регистрации</button>
+            <button type="button" class="btn-sort" onclick="sortTest(this.value)" value="rating">Рейтинг</button>
+            <div class="table-container">
+              <table id="zen">
+                <thead>
+                  <tr>
+                    <th scope="col">Имя пользователя</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Дата регистрации</th>
+                    <th scope="col">Рейтинг</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td>zx053a@yandex.ru</td>
+                    <td>12.12.22</td>
+                    <td>9</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+            
+        </section>
+    </div>
+    
 
     
 

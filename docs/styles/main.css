@@ -109,6 +109,8 @@ body {
 .container {
   max-width: 1001px;
   padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -135,13 +137,21 @@ h3 {
   white-space: nowrap;
 }
 
+/* SEARCH */
 .list__title {
   margin-bottom: 20px;
 }
 
 .form__search {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   max-width: 961px;
   height: 102px;
@@ -149,12 +159,18 @@ h3 {
   padding: 12px 44px 16px 16px;
   border-radius: 7px;
   background: #FFF;
+  -webkit-box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
   box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
 }
 
 .search__label {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   font-size: 12px;
 }
@@ -177,8 +193,15 @@ h3 {
 }
 
 .test {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   height: 400px;
 }
@@ -205,6 +228,89 @@ h3 {
   width: 16px;
   height: 16px;
   background-image: url("../img/clean.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* TABLE */
+.table-container {
+  padding: 0 16px;
+  border-radius: 7px;
+  background-color: #FFFFFF;
+  overflow-x: scroll;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+table {
+  /* table-layout: fixed; */
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead th:nth-child(1) {
+  width: 263px;
+}
+
+thead th:nth-child(2) {
+  width: 250px;
+}
+
+thead th:nth-child(3) {
+  width: 241px;
+}
+
+thead th:nth-child(4) {
+  width: 157px;
+}
+
+thead th:nth-child(5) {
+  width: 0px;
+  padding-right: 30px;
+}
+
+thead th {
+  color: #9EAAB4;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+tbody th {
+  color: #0CB4F1;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+td {
+  color: var(--font, #ACACAC);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+th,
+td {
+  height: 50px;
+  padding: 0 10px;
+}
+
+tbody th,
+td {
+  border-top: 1px solid #F7F7F7;
+}
+
+.btn-remove {
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/cancel.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -62,7 +62,7 @@ gulp.task('sass:dev', function() {
         .src('./src/styles/main.scss')
         .pipe(changed('./docs/styles/'))
         .pipe(plumber(plumberConfig('SASS')))
-        //.pipe(prefixer())
+        .pipe(prefixer())
         .pipe(sass())
         .pipe(gulp.dest('./docs/styles/'))
 })
