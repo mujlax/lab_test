@@ -1,10 +1,11 @@
 let rows;
+let rowsDefault;
 
-function renderTable (rows) {
+function renderTable(rows) {
     const table = document.querySelector("table");
     const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
-    
+
     tableBody.innerHTML = "<tr></tr>";
 
     for (const row of rows) {
@@ -15,13 +16,13 @@ function renderTable (rows) {
                 continue
             }
             const cellElement = document.createElement("td");
-            
+
             if (key == "registration_date") {
                 const t = new Intl.DateTimeFormat()
                 cellElement.textContent = t.format(new Date(row[key]));
             } else {
                 cellElement.textContent = row[key];
-            } 
+            }
             rowElement.appendChild(cellElement);
         }
         const cellRemoveIcon = document.createElement("td");
@@ -37,44 +38,72 @@ async function loadIntoTable(url, table) {
     const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
     const response = await fetch(url);
-    rows = await response.json();
+    rowsDefault = await response.json();
+    rows = [...rowsDefault];
 
     //Clear
 
     tableBody.innerHTML = "<tr></tr>";
-  
 
     renderTable(rows)
 }
 
-async function loadData (url) {
+async function loadData(url) {
     const response = await fetch(url);
     return await response.json();
 }
 
-function sortTest(value) {
-    
-    switch (value) {
-        case "registration": 
-            rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
-            console.log("Reg");
-            break;
-        case "rating": 
-            rows.sort((a, b) => a.rating - b.rating);
-            console.log("Rat");
-            break;
-        default: console.log("Poh");
-    }
-    renderTable(rows);
-    
+// function sortRegistration(obj) {
 
+// case "registration": 
+//             rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
+//             console.log("Reg");
+//             break;
+//         case "rating": 
+//             rows.sort((a, b) => a.rating - b.rating);
+//             console.log("Rat");
+//             obj.value = "test";
+//             break;
+//         default: console.log("Poh");
+
+//     renderTable(rows);
+// }
+
+function sortRegistration(obj) {
+    if (obj.value == 'default') {
+        rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date) ? 1 : -1);
+        obj.value = "sortAsc";
+    } else if (obj.value == 'sortAsc') {
+        rows.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date) ? -1 : 1);
+        obj.value = "sortDesc";
+    } else if (obj.value == 'sortDesc') {
+        rows = rowsDefault;
+        obj.value = "default";
+    }
+    console.log(obj.value);
+    renderTable(rows);
+}
+
+function sortRating(obj) {
+    if (obj.value == 'default') {
+        rows.sort((a, b) => a.rating - b.rating);
+        obj.value = "sortAsc";
+    } else if (obj.value == 'sortAsc') {
+        rows.sort((a, b) => b.rating - a.rating);
+        obj.value = "sortDesc";
+    } else if (obj.value == 'sortDesc') {
+        rows = rowsDefault;
+        obj.value = "default";
+    }
+    console.log(obj.value);
+    renderTable(rows);
 }
 
 
 loadIntoTable("https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users", document.querySelector("table"))
 
-function test3 (str) {
-    
+function test3(str) {
+
 }
 
 console.log(rows);
