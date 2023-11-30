@@ -317,3 +317,18 @@ td {
   font-weight: 700;
   line-height: 16px;
 }
+
+.btn-pagination {
+  background-color: tomato;
+  width: 100px;
+  height: 50px;
+}
+
+.input-pagination {
+  padding: 5px;
+  text-align: center;
+  width: 70px;
+  height: 50px;
+  font-weight: 900;
+  background-color: #c6c6c6;
+}
