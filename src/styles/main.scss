@@ -63,6 +63,9 @@
 .reset__users {
     position: relative;
     padding-left: 16px;
+    max-width: 125px;
+    text-align: left;
+    
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -83,6 +86,27 @@
 
 
 /* TABLE */
+
+.btn-remove {
+    width: 15px;
+    height: 15px;
+    background-image: url("../img/cancel.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-sort {
+    color: #9EAAB4;
+    text-decoration: underline;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+
+    &_isActive {
+        color: #333333;
+    }
+}
 
 .table-container {
     padding: 0 16px;
@@ -119,7 +143,6 @@ thead th:nth-child(4) {
 }
 
 thead th:nth-child(5) {
-    width: 0px;
     padding-right: 30px;
 }
 
@@ -159,19 +182,16 @@ td {
 
 }
 
-
-
-
-
 tbody th,
 td {
     border-top: 1px solid #F7F7F7;
 }
 
-.btn-remove {
-    width: 15px;
-    height: 15px;
-    background-image: url("../img/cancel.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
+.table__username {
+    color: #0CB4F1;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
 }

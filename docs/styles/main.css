@@ -102,11 +102,12 @@ legend {
 body {
   font-family: var(--font-main);
   color: #333333;
-  background-color: var(--accent-color);
+  background-color: var(--white-color);
   box-sizing: border-box;
 }
 
 .container {
+  margin: auto;
   max-width: 1001px;
   padding: 40px 20px;
   display: flex;
@@ -143,15 +144,8 @@ h3 {
 }
 
 .form__search {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   max-width: 961px;
   height: 102px;
@@ -159,18 +153,12 @@ h3 {
   padding: 12px 44px 16px 16px;
   border-radius: 7px;
   background: #FFF;
-  -webkit-box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
   box-shadow: 0px 18px 15px 0px rgba(148, 148, 148, 0.15);
 }
 
 .search__label {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   font-size: 12px;
 }
@@ -193,15 +181,8 @@ h3 {
 }
 
 .test {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   height: 400px;
 }
@@ -215,6 +196,8 @@ h3 {
 .reset__users {
   position: relative;
   padding-left: 16px;
+  max-width: 125px;
+  text-align: left;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -233,6 +216,26 @@ h3 {
 }
 
 /* TABLE */
+.btn-remove {
+  width: 15px;
+  height: 15px;
+  background-image: url("../img/cancel.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-sort {
+  color: #9EAAB4;
+  text-decoration: underline;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+.btn-sort_isActive {
+  color: #333333;
+}
+
 .table-container {
   padding: 0 16px;
   border-radius: 7px;
@@ -266,7 +269,6 @@ thead th:nth-child(4) {
 }
 
 thead th:nth-child(5) {
-  width: 0px;
   padding-right: 30px;
 }
 
@@ -307,10 +309,11 @@ td {
   border-top: 1px solid #F7F7F7;
 }
 
-.btn-remove {
-  width: 15px;
-  height: 15px;
-  background-image: url("../img/cancel.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
+.table__username {
+  color: #0CB4F1;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
 }

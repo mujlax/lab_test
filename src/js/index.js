@@ -1,4 +1,4 @@
-let rows;
+let rows = [];
 let rowsDefault;
 
 function renderTable(rows) {
@@ -23,11 +23,20 @@ function renderTable(rows) {
             } else {
                 cellElement.textContent = row[key];
             }
+
+            if (key == "username") {
+                cellElement.className = "table__username"
+            }
+            
             rowElement.appendChild(cellElement);
         }
+        
         const cellRemoveIcon = document.createElement("td");
         const btn = document.createElement("button");
         btn.className = "btn-remove";
+        btn.addEventListener('click', (event) => {
+            deleteUser(row.id);
+        })
         cellRemoveIcon.appendChild(btn);
         rowElement.appendChild(cellRemoveIcon);
         tableBody.appendChild(rowElement);
@@ -53,49 +62,34 @@ async function loadData(url) {
     return await response.json();
 }
 
-// function sortRegistration(obj) {
-
-// case "registration": 
-//             rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
-//             console.log("Reg");
-//             break;
-//         case "rating": 
-//             rows.sort((a, b) => a.rating - b.rating);
-//             console.log("Rat");
-//             obj.value = "test";
-//             break;
-//         default: console.log("Poh");
-
-//     renderTable(rows);
-// }
 
 function sortRegistration(obj) {
     if (obj.value == 'default') {
-        rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date) ? 1 : -1);
+        rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
         obj.value = "sortAsc";
     } else if (obj.value == 'sortAsc') {
-        rows.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date) ? -1 : 1);
+        rows.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date));
         obj.value = "sortDesc";
     } else if (obj.value == 'sortDesc') {
         rows = rowsDefault;
         obj.value = "default";
     }
-    console.log(obj.value);
     renderTable(rows);
 }
 
 function sortRating(obj) {
-    if (obj.value == 'default') {
+    console.log("Asdasd");
+    let value = obj.getAttribute("value");
+    if (value == 'default') {
+        rows = [...rowsDefault];
+        obj.setAttribute("value", "sortAsc");
+    } else if (value == 'sortAsc') {
         rows.sort((a, b) => a.rating - b.rating);
-        obj.value = "sortAsc";
-    } else if (obj.value == 'sortAsc') {
+        obj.setAttribute("value", "sortDesc");
+    } else if (value == 'sortDesc') {
         rows.sort((a, b) => b.rating - a.rating);
-        obj.value = "sortDesc";
-    } else if (obj.value == 'sortDesc') {
-        rows = rowsDefault;
-        obj.value = "default";
+        obj.setAttribute("value", "default");
     }
-    console.log(obj.value);
     renderTable(rows);
 }
 
@@ -104,6 +98,34 @@ loadIntoTable("https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users", document.quer
 
 function test3(str) {
 
+}
+
+function searchUser(obj) {
+    // поиск по email или имени
+    const newRows = rows.filter((el) => 
+        // поиск по email 
+        el.email.toLowerCase().includes(obj.value.toLowerCase()) || el.username.toLowerCase().includes(obj.value.toLowerCase())
+    )
+    renderTable(newRows);
+    console.log(obj.value);
+}
+
+function deleteUser(id) {
+    rows = rows.filter((el) => el.id != id); 
+    rowsDefault = rowsDefault.filter((el) => el.id != id); 
+    console.log(rows);
+    renderTable(rows);
+    // поиск по email или имени
+    // const newRows = rows.filter((el) => 
+    //     el.email.toLowerCase().includes(obj.value.toLowerCase()) || el.username.toLowerCase().includes(obj.value.toLowerCase())
+    // )
+    //renderTable(newRows);
+    console.log(id);
+}
+
+function remove() {
+    document.querySelector(".search__input").value = "";
+    renderTable(rowsDefault);
 }
 
 console.log(rows);

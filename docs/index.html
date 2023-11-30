@@ -14,9 +14,9 @@
             <h1 class="list__title">Список пользователей</h1>
             <div class="form__search">
                 <label class="search__label">
-                    <input type="text" class="search__input" name="email" id="" placeholder="Поиск по имени или e-mail">
+                    <input onchange="searchUser(this)" type="text" class="search__input" name="email" id="" placeholder="Поиск по имени или e-mail">
                 </label>
-                <a href="#" class="reset__users">Очистить фильтр</a>
+                <button onclick="remove(this)" href="#" class="reset__users">Очистить фильтр</button>
             </div>
             
             <!-- <div class="test">
@@ -27,9 +27,9 @@
 
         <section class="section-table_inner">
             <h1 class="visually-hidden">Список пользователей</h1>
-
-            <button type="button" class="btn-sort" onclick="sortRegistration(this)" value="default">Дата регистрации</button>
-            <button type="button" class="btn-sort" onclick="sortRating(this)" value="default">Рейтинг</button>
+            <h2>Сортировка</h2>
+            <button type="button" class="btn-sort btn-sort_isActive" onclick="sortRegistration(this)" value="default">Дата регистрации</button>
+            <button type="button" class="btn-sort" onclick="sortRating(this)" value="sortAsc">Рейтинг</button>
             <div class="table-container">
               <table id="zen">
                 <thead>
@@ -37,7 +37,7 @@
                     <th scope="col">Имя пользователя</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Дата регистрации</th>
-                    <th scope="col">Рейтинг</th>
+                    <th onclick="sortRating(this)" value="sortAsc" scope="col">Рейтинг</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
