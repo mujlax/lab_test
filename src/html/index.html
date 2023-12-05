@@ -1,68 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>&#128126 lab_Zyablitsev</title>
-    <link rel="stylesheet" href="./styles/main.css"></link>
-    <link rel="icon" type="image/x-icon" href="/img/bug.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&#128126 lab_Zyablitsev</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  </link>
+  <link rel="icon" type="image/x-icon" href="/img/bug.ico">
 </head>
+
 <body>
 
-    <div class="container">
-        <section class="users">
-            <h1 class="list__title">Список пользователей</h1>
-            <div class="form__search">
-                <label class="search__label">
-                    <input onchange="searchUser(this)" type="text" class="search__input" name="email" id="" placeholder="Поиск по имени или e-mail">
-                </label>
-                <button onclick="remove(this)" href="#" class="reset__users">Очистить фильтр</button>
-            </div>
-            
-            <!-- <div class="test">
+  <div class="container">
+    <section class="users">
+      <h1 class="list__title">Список пользователей</h1>
+      <div class="form__search">
+        <label class="search__label">
+          <input onchange="searchUser(this)" type="text" class="search__input" name="email" id=""
+            placeholder="Поиск по имени или e-mail">
+        </label>
+        <button onclick="remove(this)" href="#" class="reset__users">Очистить фильтр</button>
+      </div>
+
+      <!-- <div class="test">
                 <input type="text" placeholder="Поиск по email" class="test2">
                 <input type="text" placeholder="Поиск по email" class="test2">
             </div> -->
-        </section>
+    </section>
 
-        <section class="section-table_inner">
-            <h1 class="visually-hidden">Список пользователей</h1>
-            <h2>Сортировка</h2>
-            <button type="button" class="btn-sort btn-sort_isActive" onclick="sortRegistration(this)" value="default">Дата регистрации</button>
-            <button type="button" class="btn-sort" onclick="sortRating(this)" value="sortAsc">Рейтинг</button>
-            <div class="table-container">
-              <table id="zen">
-                <thead>
-                  <tr>
-                    <th scope="col">Имя пользователя</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Дата регистрации</th>
-                    <th onclick="sortRating(this)" value="sortAsc" scope="col">Рейтинг</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">Username</th>
-                    <td>zx053a@yandex.ru</td>
-                    <td>12.12.22</td>
-                    <td>9</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-            <button onclick="dec()" class="btn-pagination btn-pagination__left" value="left">Left</button>
-            <input onchange="setStep(this.value)" class="input-pagination" placeholder="Поиск по имени или e-mail">
-            <button onclick="inc()" class="btn-pagination btn-pagination__right" value="right">Right</button>
-            
-        </section>
-    </div>
-    
+    <section class="section section-table_inner">
+      <h1 class="visually-hidden">Список пользователей</h1>
+      <div class="table-header_button">
+        <h2 class="title_sort">Сортировка:</h2>
+        <button type="button" class="btn-sort" onclick="sortRegistration(this)" value="default">Дата
+          регистрации</button>
+        <button type="button" class="btn-sort" onclick="sortRating(this)" value="sortAsc">Рейтинг</button>
+      </div>
+      <div class="table-container">
+        <table id="zen">
+          <thead>
+            <tr>
+              <th scope="col">Имя пользователя</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Дата регистрации</th>
+              <th onclick="sortRating(this)" value="sortAsc" scope="col">Рейтинг</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Username</th>
+              <td>zx053a@yandex.ru</td>
+              <td>12.12.22</td>
+              <td>9</td>
+            </tr>
 
-    
+          </tbody>
+        </table>
+      </div>
+      <div class="table-bottom_button">
+        <button onclick="dec()" class="btn-pagination btn-pagination__left" value="left"><</button>
+        <input onchange="setStep(this.value)" class="input-pagination" placeholder="5">
+        <button onclick="inc()" class="btn-pagination btn-pagination__right" value="right">></button>
+      </div>
+
+    </section>
+  </div>
 
 
-    <script src="./js/index.js"></script>
+
+
+
+  <script src="./js/index.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,5 @@
+"use strict";
+
 let rows = [];
 let rowsDefault;
 
@@ -54,9 +56,7 @@ function renderTable(rows) {
     const tableBody = table.querySelector("tbody");
 
     tableBody.innerHTML = "<tr></tr>";
-    const counter = document.createElement("h1");
-    counter.textContent = rows.length;
-    tableBody.appendChild(counter);
+
     for (const row of rows) {
         const rowElement = document.createElement("tr");
 
@@ -181,6 +181,26 @@ function remove() {
     document.querySelector(".search__input").value = "";
     renderTable(rows);
 }
+
+function buttonsTest() {
+    const btnsSort = document.getElementsByClassName("btn-sort")
+    for (let i = 0; i < btnsSort.length; i++) {
+        btnsSort[i].addEventListener("click", function() {
+            const currentActive = document.querySelector(".btn-sort_isActive");
+            if (currentActive != null) {
+                currentActive.classList.remove("btn-sort_isActive");
+            }
+            this.classList.add("btn-sort_isActive")
+        })
+    };
+    
+    
+    
+
+
+    //console.log(btns);
+}
+buttonsTest()
 
 console.log(rows);
 //document.querySelector("table").innerHTML = "<tr></tr>"
