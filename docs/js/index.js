@@ -1,11 +1,23 @@
 "use strict";
 
+
+/**
+ * TODO:
+ * 1. Изменение названий переменных и методов
+ * 2. Удаление ненужных методов (функций)
+ * 3. Переработка сортировки
+ * 4. SOLID (S) разбиение больший функций на более мелкие
+ * 5.* Избавиться от глобальных переменных
+ * 6.** Разделение бизнес-потребностей на файлы
+ */
+
 let rows = [];
 let rowsDefault;
 
 let sliceNumber = 5;
 let pageNumber = 0;
 let pageNumber2 = 5;
+
 function pagination(value) {
     rows = rowsDefault.slice(pageNumber, pageNumber2);
     renderTable(rows);
@@ -28,31 +40,29 @@ let page = 0;
 function setStep(value) {
     step = Number(value);
     pageRender(0)
-    //console.log(pag);
 }
-function inc(){
-    if (page*step+step < rowsDefault.length)
+function inc() {
+    if (page * step + step < rowsDefault.length)
         page++;
     pageRender(page)
 }
 
-function dec(){
+function dec() {
     if (page != 0)
         page--;
     pageRender(page)
 }
 
-function pageRender(pageNum){
-    let index = pageNum*step;
-    rows = rowsDefault.slice(index, index+step);
-    console.log({page, step, index, rows})
+function pageRender(pageNum) {
+    let index = pageNum * step;
+    rows = rowsDefault.slice(index, index + step);
+    console.log({ page, step, index, rows })
     renderTable(rows);
 }
 
 
 function renderTable(rows) {
     const table = document.querySelector("table");
-    const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
 
     tableBody.innerHTML = "<tr></tr>";
@@ -76,10 +86,10 @@ function renderTable(rows) {
             if (key == "username") {
                 cellElement.className = "table__username"
             }
-            
+
             rowElement.appendChild(cellElement);
         }
-        
+
         const cellRemoveIcon = document.createElement("td");
         const btn = document.createElement("button");
         btn.className = "btn-remove";
@@ -92,17 +102,20 @@ function renderTable(rows) {
     }
 }
 
+loadIntoTable(
+    "https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users",
+    document.querySelector("table")
+    )
+
 async function loadIntoTable(url, table) {
-    const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
     const response = await fetch(url);
     rowsDefault = await response.json();
     rows = [...rowsDefault];
 
     //Clear
-
     tableBody.innerHTML = "<tr></tr>";
-    
+
     pageRender(0)
 }
 
@@ -114,10 +127,12 @@ async function loadData(url) {
 
 function sortRegistration(obj) {
     if (obj.value == 'default') {
-        rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
+        rows.sort((a, b) => 
+        new Date(a.registration_date) - new Date(b.registration_date));
         obj.value = "sortAsc";
     } else if (obj.value == 'sortAsc') {
-        rows.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date));
+        rows.sort((a, b) => 
+        new Date(b.registration_date) - new Date(a.registration_date));
         obj.value = "sortDesc";
     } else if (obj.value == 'sortDesc') {
         rows = rowsDefault;
@@ -143,65 +158,43 @@ function sortRating(obj) {
 }
 
 
-loadIntoTable("https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users", document.querySelector("table"))
-
-function test3(str) {
-
-}
 
 function searchUser(obj) {
-    // поиск по email или имени
-    const newRows = rowsDefault.filter((el) => 
-        // поиск по email 
-        el.email.toLowerCase().includes(obj.value.toLowerCase()) || el.username.toLowerCase().includes(obj.value.toLowerCase())
+    const newRows = rowsDefault.filter((el) =>
+        el.email.toLowerCase().includes(obj.value.toLowerCase()) 
+        || 
+        el.username.toLowerCase().includes(obj.value.toLowerCase())
     )
     renderTable(newRows);
-    console.log(obj.value);
 }
 
 function deleteUser(id) {
-    let isDelete = confirm("ТЫ РИЛ ХОЧЕШЬ УДАЛИТЬ ЧЕЛА???")
-    if (isDelete){
-        rows = rows.filter((el) => el.id != id); 
-        rowsDefault = rowsDefault.filter((el) => el.id != id); 
-        console.log(rows);
+    const isDelete = confirm("Удалить челебоса?")
+    if (isDelete) {
+        rows = rows.filter((el) => el.id != id);
+        rowsDefault = rowsDefault.filter((el) => el.id != id);
         renderTable(rows);
     } else {
         alert("Ну ок, не удаляем")
     }
-    // поиск по email или имени
-    // const newRows = rows.filter((el) => 
-    //     el.email.toLowerCase().includes(obj.value.toLowerCase()) || el.username.toLowerCase().includes(obj.value.toLowerCase())
-    // )
-    //renderTable(newRows);
-    console.log(id);
 }
 
-function remove() {
+function clearSearch() {
     document.querySelector(".search__input").value = "";
     renderTable(rows);
 }
 
-function buttonsTest() {
-    const btnsSort = document.getElementsByClassName("btn-sort")
-    for (let i = 0; i < btnsSort.length; i++) {
-        btnsSort[i].addEventListener("click", function() {
-            const currentActive = document.querySelector(".btn-sort_isActive");
-            if (currentActive != null) {
-                currentActive.classList.remove("btn-sort_isActive");
-            }
-            this.classList.add("btn-sort_isActive")
-        })
-    };
-    
-    
-    
+// INIT
 
+const btnsSort = document.getElementsByClassName("btn-sort")
+for (let i = 0; i < btnsSort.length; i++) {
+    btnsSort[i].addEventListener("click", function () {
+        const currentActive = document.querySelector(".btn-sort_isActive");
+        if (currentActive != null) {
+            currentActive.classList.remove("btn-sort_isActive");
+        }
+        this.classList.add("btn-sort_isActive")
+    })
+};
 
-    //console.log(btns);
-}
-buttonsTest()
-
-console.log(rows);
-//document.querySelector("table").innerHTML = "<tr></tr>"
 
