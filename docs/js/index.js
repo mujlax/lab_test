@@ -25,13 +25,10 @@ function pagination(value) {
         pageNumber -= sliceNumber;
         pageNumber2 -= sliceNumber;
         renderTable(rows);
-        console.log(pageNumber);
         return
     }
-    console.log(value);
     pageNumber += sliceNumber;
     pageNumber2 += sliceNumber;
-    console.log(pageNumber);
     renderTable(rows);
 }
 
@@ -56,7 +53,6 @@ function dec() {
 function pageRender(pageNum) {
     let index = pageNum * step;
     rows = rowsDefault.slice(index, index + step);
-    console.log({ page, step, index, rows })
     renderTable(rows);
 }
 
@@ -68,34 +64,32 @@ function renderTable(rows) {
     tableBody.innerHTML = "<tr></tr>";
 
     for (const row of rows) {
-        const rowElement = document.createElement("tr");
-
+        
         for (let key in row) {
-            if (key == "id") {
-                continue
-            }
+            if (key == "id") continue;
+            
             const cellElement = document.createElement("td");
-
+            if (key == "username") {
+                cellElement.className = "table__username"
+            }
+            
             if (key == "registration_date") {
                 const t = new Intl.DateTimeFormat()
                 cellElement.textContent = t.format(new Date(row[key]));
             } else {
                 cellElement.textContent = row[key];
             }
-
-            if (key == "username") {
-                cellElement.className = "table__username"
-            }
-
+            const rowElement = document.createElement("tr");
             rowElement.appendChild(cellElement);
         }
 
-        const cellRemoveIcon = document.createElement("td");
         const btn = document.createElement("button");
         btn.className = "btn-remove";
         btn.addEventListener('click', (event) => {
             deleteUser(row.id);
         })
+
+        const cellRemoveIcon = document.createElement("td");
         cellRemoveIcon.appendChild(btn);
         rowElement.appendChild(cellRemoveIcon);
         tableBody.appendChild(rowElement);
