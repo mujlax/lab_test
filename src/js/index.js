@@ -169,7 +169,7 @@ function deleteUser(id) {
     } else {
         alert("Ну ок, не удаляем")
     }
-    // поиск по email или имени
+    // поиск по email или имении
     // const newRows = rows.filter((el) => 
     //     el.email.toLowerCase().includes(obj.value.toLowerCase()) || el.username.toLowerCase().includes(obj.value.toLowerCase())
     // )
