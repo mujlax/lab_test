@@ -46,6 +46,7 @@ for (let i = 0; i < btnsSort.length; i++) {
 };
 
 function renderTable(rows) {
+    
     const table = document.querySelector("table");
     const tableBody = table.querySelector("tbody");
     
@@ -99,12 +100,12 @@ function createDeleteButton(id){
 let isRegAsc = true;
 function sortRegistration() {
     if (isRegAsc) {
-        rows.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
+        rowsDefault.sort((a, b) => new Date(a.registration_date) - new Date(b.registration_date));
     } else {
-        rows.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date));
+        rowsDefault.sort((a, b) => new Date(b.registration_date) - new Date(a.registration_date));
     }
     isRegAsc = !isRegAsc;
-    renderTable(rows);
+    pageRender(page)
 }
 
 let isRatingAsc = true;
@@ -114,8 +115,9 @@ function sortRating() {
     } else {
         rowsDefault.sort((a, b) => b.rating - a.rating);
     }
+
     isRatingAsc = !isRatingAsc;
-    renderTable(rowsDefault);
+    pageRender(page);
 }
 
 
