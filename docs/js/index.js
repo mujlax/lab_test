@@ -25,8 +25,8 @@ initRender("https://5ebbb8e5f2cfeb001697d05c.mockapi.io/users")
 async function initRender(url) {
     rowsDefault = await loadData(url);
     rows = [...rowsDefault];
-    
-    pageRender(0)
+
+    renderTable(rows);
 }
 
 async function loadData(url) {
@@ -45,24 +45,28 @@ for (let i = 0; i < btnsSort.length; i++) {
     })
 };
 
+let index = 0;
 function renderTable(rows) {
+    const step = 5;
+    const newRows = rows.slice(index, index + step);
+    console.log(newRows);
+
     const table = document.querySelector("table");
     const tableBody = table.querySelector("tbody");
-    
+
     tableBody.innerHTML = "<tr></tr>";
-    
-    for (const row of rows) {
+
+    for (const row of newRows) {
         const rowElement = document.createElement("tr");
         for (let key in row) {
-            if (key == "id") 
+            if (key == "id")
                 continue;
-            
+
             const cellElement = prepareCell(document.createElement("td"), key, row);
-            console.log(cellElement);
             rowElement.appendChild(cellElement);
         }
         const btn = createDeleteButton(row.id);
-        
+
         const cellDeleteButton = document.createElement("td");
         cellDeleteButton.appendChild(btn);
         rowElement.appendChild(cellDeleteButton);
@@ -70,7 +74,7 @@ function renderTable(rows) {
     }
 }
 
-function prepareCell(cell, key, row){
+function prepareCell(cell, key, row) {
     if (key == "username") {
         cell.className = "table__username"
     }
@@ -87,7 +91,7 @@ function parseDate(dateStr) {
     return formatter.format(new Date(dateStr));
 }
 
-function createDeleteButton(id){
+function createDeleteButton(id) {
     const btn = document.createElement("button");
     btn.className = "btn-remove";
     btn.addEventListener('click', () => {
@@ -110,12 +114,12 @@ function sortRegistration() {
 let isRatingAsc = true;
 function sortRating() {
     if (isRatingAsc) {
-        rowsDefault.sort((a, b) => a.rating - b.rating);
+        rows.sort((a, b) => a.rating - b.rating);
     } else {
-        rowsDefault.sort((a, b) => b.rating - a.rating);
+        rows.sort((a, b) => b.rating - a.rating);
     }
     isRatingAsc = !isRatingAsc;
-    renderTable(rowsDefault);
+    renderTable(rows);
 }
 
 
@@ -146,26 +150,38 @@ function clearSearch() {
 
 // PAGINATION
 
-let step = 5;
-let page = 0;
-function setStep(value) {
-    step = Number(value);
-    pageRender(0)
-}
+// let step = 5;
+// let page = 0;
+// function setStep(value) {
+//     step = Number(value);
+//     pageRender(0)
+// }
+// function inc() {
+//     if (page * step + step < rowsDefault.length)
+//         page++;
+//     pageRender(page)
+// }
+
+// function dec() {
+//     if (page != 0)
+//         page--;
+//     pageRender(page)
+// }
+
+// function pageRender(pageNum) {
+//     let index = pageNum * step;
+//     rows = rowsDefault.slice(index, index + step);
+//     pageRender(rows);
+// }
+
 function inc() {
-    if (page * step + step < rowsDefault.length)
-        page++;
-    pageRender(page)
+    if (index >= rows.length-5) return;
+    index += 5;
+    renderTable(rows);
 }
 
 function dec() {
-    if (page != 0)
-        page--;
-    pageRender(page)
-}
-
-function pageRender(pageNum) {
-    let index = pageNum * step;
-    rows = rowsDefault.slice(index, index + step);
+    if (index <= 0) return;
+    index -= 5;
     renderTable(rows);
 }
