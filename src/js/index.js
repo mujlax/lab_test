@@ -46,6 +46,9 @@ for (let i = 0; i < btnsSort.length; i++) {
 };
 
 function renderTable(rows) {
+    const step = 6;
+    
+    
     const table = document.querySelector("table");
     const tableBody = table.querySelector("tbody");
     
@@ -58,6 +61,7 @@ function renderTable(rows) {
                 continue;
             
             const cellElement = prepareCell(document.createElement("td"), key, row);
+            console.log(cellElement);
             rowElement.appendChild(cellElement);
         }
         const btn = createDeleteButton(row.id);
@@ -109,12 +113,12 @@ function sortRegistration() {
 let isRatingAsc = true;
 function sortRating() {
     if (isRatingAsc) {
-        rows.sort((a, b) => a.rating - b.rating);
+        rowsDefault.sort((a, b) => a.rating - b.rating);
     } else {
-        rows.sort((a, b) => b.rating - a.rating);
+        rowsDefault.sort((a, b) => b.rating - a.rating);
     }
     isRatingAsc = !isRatingAsc;
-    renderTable(rows);
+    renderTable(rowsDefault);
 }
 
 
